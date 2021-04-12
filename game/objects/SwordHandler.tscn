@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/sword_handler.gd" type="Script" id=1]
+[ext_resource path="res://assets/meshes/sword.gltf" type="PackedScene" id=2]
+
+[node name="SwordHandler" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+
+[node name="GimbalX" type="Spatial" parent="."]
+
+[node name="GimbalZ" type="Spatial" parent="GimbalX"]
+
+[node name="Sword" parent="GimbalX/GimbalZ" instance=ExtResource( 2 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+
+[node name="MouseDetector" type="Node2D" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
