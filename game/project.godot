@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://objects/enemy.gd"
+}, {
+"base": "Area",
+"class": "HitDetectArea",
+"language": "GDScript",
+"path": "res://objects/hit_detect_area.gd"
+} ]
 _global_script_class_icons={
-
+"Enemy": "",
+"HitDetectArea": ""
 }
 
 [application]

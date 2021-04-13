@@ -13,10 +13,21 @@ onready var gimbal_x := $GimbalX
 onready var gimbal_z := $GimbalX/GimbalZ
 onready var tween := $Tween
 
+var vigor := 0.0
+var last_pos : Vector2
+
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		adjust_sword(event.relative / 2.0)
+
+
+func _process(delta : float) -> void:
+	update_vigor(delta)
 
 
 func adjust_sword(swing_amount : Vector2) -> void:
@@ -37,3 +48,16 @@ func adjust_sword(swing_amount : Vector2) -> void:
 	tween.interpolate_property(gimbal_z, "rotation_degrees:z", gimbal_z.rotation_degrees.x + swing_amount.x, 0, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.interpolate_property(gimbal_x, "rotation_degrees:x", max(-90, gimbal_x.rotation_degrees.x + abs(swing_amount.x) * -0.5), 0, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
+
+
+func update_vigor(delta : float) -> void:
+	if last_pos:
+		var distance : float = mouse_detector.get_global_mouse_position().distance_to(last_pos)
+		vigor = distance
+	
+	last_pos = mouse_detector.get_global_mouse_position()
+
+
+func _on_HitArea_area_entered(area : Area) -> void:
+	if area is HitDetectArea:
+		area.hit(vigor)
