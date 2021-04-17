@@ -9,14 +9,11 @@ extents = Vector3( 0.107123, 1.17813, 0.0182577 )
 [node name="SwordHandler" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
-
 [node name="GimbalX" type="Spatial" parent="."]
 
 [node name="GimbalZ" type="Spatial" parent="GimbalX"]
 
-[node name="Sword" parent="GimbalX/GimbalZ" instance=ExtResource( 2 )]
+[node name="SwordMesh" parent="GimbalX/GimbalZ" instance=ExtResource( 2 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
 [node name="HitArea" type="Area" parent="GimbalX/GimbalZ"]
